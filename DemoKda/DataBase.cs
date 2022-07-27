@@ -51,6 +51,24 @@ namespace DemoKda
             exec(query);
         }
 
+        public void insertEmp(string name, string salary, string birth, string id)
+        {
+            string query = $"exec insertEmp {name},{salary},'{birth}',{id} ";
+            exec(query);
+        }
+
+        public void insertProj(string name, string st, String end)
+        {
+            string query = $"exec insertProj {name},'{st}','{end}' ";
+            exec(query);
+        }
+
+        public void insertProjDep(string proj, string dep)
+        {
+            string query = $"exec insertProjDep {proj},{dep} ";
+            exec(query);
+        }
+
         private void exec(string query)
         {
             SqlCommand command = new SqlCommand(query, conn);
