@@ -70,7 +70,7 @@
             <asp:DropDownList ID="projdepddl2" runat="server" AutoPostBack="True" OnSelectedIndexChanged="projdepddl2_SelectedIndexChanged" ></asp:DropDownList> <br>
             <asp:CheckBoxList ID="Empls" runat="server"></asp:CheckBoxList>
 
-            <asp:Button ID="Button1" runat="server" Text="Add"  /> <br>
+            <asp:Button ID="emptoProject" runat="server" Text="Add" OnClick="emptoProject_Click"  /> <br>
 
         </div>
     </div>

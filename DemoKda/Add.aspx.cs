@@ -141,10 +141,10 @@ namespace DemoKda
 
         protected void projdepddl2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Empls.Items.Clear();
             string id = _Default.getId(projddl2.SelectedValue, projTable);
-
             string depId = _Default.getId(projdepddl2.SelectedValue, depProjTable);
-            empDepProjTable = db.fetchProjEmps(id, depId);
+            empDepProjTable = db.fetchNoProjEmps(id, depId);
 
 
             foreach (DataRow row in empDepProjTable.Rows)
@@ -154,6 +154,12 @@ namespace DemoKda
                     Empls.Items.Add(record);
             }
             
+
+        }
+
+        protected void emptoProject_Click(object sender, EventArgs e)
+        {
+
 
         }
     }

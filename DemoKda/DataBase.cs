@@ -113,6 +113,15 @@ namespace DemoKda
             return getRecords(query, cols);
 
         }
+        public DataTable fetchNoProjEmps(string pro, string dep)
+        {
+
+            string[] cols = { "Name", "DailyRate" };
+            string query = $"exec fetchNoProjEmps {pro},{dep}";
+
+            return getRecords(query, cols);
+
+        }
         public DataTable fetchDeps()
         {
             string[] cols = { "ID", "Name"};
