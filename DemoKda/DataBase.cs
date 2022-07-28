@@ -69,6 +69,12 @@ namespace DemoKda
             exec(query);
         }
 
+        public void assignEmp(string id,string proj, string dep)
+        {
+            string query = $"exec assignEmp {id},{proj},{dep} ";
+            exec(query);
+        }
+
         private void exec(string query)
         {
             SqlCommand command = new SqlCommand(query, conn);
@@ -116,7 +122,7 @@ namespace DemoKda
         public DataTable fetchNoProjEmps(string pro, string dep)
         {
 
-            string[] cols = { "Name", "DailyRate" };
+            string[] cols = { "ID","Name", "DailyRate" };
             string query = $"exec fetchNoProjEmps {pro},{dep}";
 
             return getRecords(query, cols);

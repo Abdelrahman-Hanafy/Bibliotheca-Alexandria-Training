@@ -46,7 +46,7 @@ namespace DemoKda
                 deptable = (DataTable)Session["deptable"];
                 projTable = (DataTable)Session["projTable"];
                 depProjTable = (DataTable)Session["depProjTable"];
-
+                empDepProjTable = (DataTable)Session["empDepProjTable"];
             }
 
 
@@ -145,7 +145,7 @@ namespace DemoKda
             string id = _Default.getId(projddl2.SelectedValue, projTable);
             string depId = _Default.getId(projdepddl2.SelectedValue, depProjTable);
             empDepProjTable = db.fetchNoProjEmps(id, depId);
-
+            Session["empDepProjTable"] = empDepProjTable;
 
             foreach (DataRow row in empDepProjTable.Rows)
             {
@@ -159,7 +159,17 @@ namespace DemoKda
 
         protected void emptoProject_Click(object sender, EventArgs e)
         {
+            string pro = _Default.getId(projddl2.SelectedValue, projTable);
+            string dep = _Default.getId(projdepddl2.SelectedValue, depProjTable);
 
+            foreach(ListItem c in Empls.Items)
+            {
+                if (c.Selected)
+                {
+                    string id = _Default.getId(c.Text, empDepProjTable);
+                    db.assignEmp(id, pro, dep);
+                }
+            }
 
         }
     }
