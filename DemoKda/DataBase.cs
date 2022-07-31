@@ -36,7 +36,28 @@ namespace DemoKda
 
             return DB;
         }
-                
+
+
+        //Update Queries
+        public void updateSec(string id, string name)
+        {
+            string query = $"exec updateSec {id},{name} ";
+            exec(query);
+        }
+
+        //Delete Queries
+        public void removeEmp(string id)
+        {
+            string query = $"exec removeEmp {id} ";
+            exec(query);
+        }
+
+        public void removeDep(string id)
+        {
+            string query = $"exec removeDep {id} ";
+            exec(query);
+        }
+
 
         // Insertion Queirs
         public void insertSec(string name)

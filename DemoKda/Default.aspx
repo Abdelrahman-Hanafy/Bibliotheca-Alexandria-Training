@@ -11,21 +11,38 @@
         <div class="col-md-4">
             <h2>Sectors</h2>
             <asp:DropDownList ID="secddl" runat="server" AutoPostBack="True" OnSelectedIndexChanged="secddl_SelectedIndexChanged"></asp:DropDownList> <br>
-            <asp:GridView ID="secs" runat="server"></asp:GridView>
+            <asp:GridView ID="secs" runat="server" OnRowEditing="secs_OnRowEditing" 
+                OnRowCancelingEdit="secs_OnRowCancelingEdit" OnRowUpdating="secs_OnRowUpdating" EmptyDataText="No records has been added.">
+                <Columns>
+                    <asp:CommandField ShowEditButton="true" />
+                </Columns>
+            </asp:GridView>
         </div>
 
         <div class="col-md-4">
             <h2>Departemt</h2>
 
               <asp:DropDownList ID="depddl" runat="server" AutoPostBack="True" OnSelectedIndexChanged="depddl_SelectedIndexChanged" ></asp:DropDownList>
-              <asp:GridView ID="Deps" runat="server"></asp:GridView>
+              <br><asp:Label ID="Delete" runat="server" Text=""></asp:Label>
+              <asp:GridView ID="Deps" runat="server" OnRowDeleting="Deps_RowDeleting">
+                  <Columns>
+                    <asp:CommandField ShowEditButton="true" />
+                    <asp:CommandField ShowDeleteButton="true" /> 
+                </Columns>
+              </asp:GridView>
 
 
         </div>
         
         <div class="col-md-4">
             <h2>Employee</h2>
-            <asp:GridView ID="Emps" runat="server"></asp:GridView>
+            <asp:GridView ID="Emps" runat="server" OnRowDeleting="Emps_RowDeleting" OnRowEditing="Emps_OnRowEditing" 
+                OnRowCancelingEdit="Emps_OnRowCancelingEdit" OnRowUpdating="Emps_OnRowUpdating" EmptyDataText="No records has been added.">
+                <Columns>
+                    <asp:CommandField ShowEditButton="true" />
+                    <asp:CommandField ShowDeleteButton="true" /> 
+                </Columns>
+            </asp:GridView>
         </div>
 
     </div>
