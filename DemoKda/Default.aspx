@@ -24,7 +24,8 @@
 
               <asp:DropDownList ID="depddl" runat="server" AutoPostBack="True" OnSelectedIndexChanged="depddl_SelectedIndexChanged" ></asp:DropDownList>
               <br><asp:Label ID="Delete" runat="server" Text=""></asp:Label>
-              <asp:GridView ID="Deps" runat="server" OnRowDeleting="Deps_RowDeleting">
+              <asp:GridView ID="Deps" runat="server" OnRowDeleting="Deps_RowDeleting" OnRowEditing="Deps_OnRowEditing" 
+                OnRowCancelingEdit="Deps_OnRowCancelingEdit" OnRowUpdating="Deps_OnRowUpdating" EmptyDataText="No records has been added.">
                   <Columns>
                     <asp:CommandField ShowEditButton="true" />
                     <asp:CommandField ShowDeleteButton="true" /> 
@@ -36,11 +37,17 @@
         
         <div class="col-md-4">
             <h2>Employee</h2>
-            <asp:GridView ID="Emps" runat="server" OnRowDeleting="Emps_RowDeleting" OnRowEditing="Emps_OnRowEditing" 
+            <asp:GridView ID="Emps" runat="server" OnRowDeleting="Emps_RowDeleting" OnRowEditing="Emps_OnRowEditing" RowDataBound="Emps_RowDataBound"
                 OnRowCancelingEdit="Emps_OnRowCancelingEdit" OnRowUpdating="Emps_OnRowUpdating" EmptyDataText="No records has been added.">
                 <Columns>
+                  
                     <asp:CommandField ShowEditButton="true" />
                     <asp:CommandField ShowDeleteButton="true" /> 
+                    <asp:TemplateField HeaderText="Attended At">
+                                 <EditItemTemplate>
+                                     <asp:DropDownList ID="ddlEditLocation" runat="server"> </asp:DropDownList>     
+                                 </EditItemTemplate>
+                    </asp:TemplateField>
                 </Columns>
             </asp:GridView>
         </div>

@@ -45,6 +45,12 @@ namespace DemoKda
             exec(query);
         }
 
+        public void updateDep(string id, string name)
+        {
+            string query = $"exec updateDep {id},{name} ";
+            exec(query);
+        }
+
         //Delete Queries
         public void removeEmp(string id)
         {
@@ -114,7 +120,7 @@ namespace DemoKda
         public DataTable fetchEmps( string dep)
         {
 
-            string[] cols = { "ID", "Name", "Salary","Age" };
+            string[] cols = { "ID", "Name", "Salary","Age", "BirthDate" };
             string query = $"exec fetchEmps {dep}";
 
             return getRecords(query, cols);
