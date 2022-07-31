@@ -38,6 +38,7 @@ namespace DemoKda
             if (IsPostBack)
             {
                 Delete.Text = "";
+                empupdate.Text = "";
                 deptable = (DataTable)Session["deptable"];
                 sectable = (DataTable)Session["sectable"];
                 emptable = (DataTable)Session["emptable"];
@@ -153,14 +154,25 @@ namespace DemoKda
         protected void Emps_OnRowEditing(object sender, GridViewEditEventArgs e)
         {
             GridViewRow row = Emps.Rows[e.NewEditIndex];
-            emp_name = row.Cells[3].Text;
-            Session["emp_name"] = emp_name;
+            if (db.countProjs(getId(row.Cells[3].Text,emptable)) == 0){
+                
+                emp_name = row.Cells[3].Text;
+                Session["emp_name"] = emp_name;
 
-            Emps.EditIndex = e.NewEditIndex;
+                Emps.EditIndex = e.NewEditIndex;
 
-            string[] cols = { "Name", "Salary", "BirthDate" };
-            View(emptable, Emps,cols);
-            Emps.Columns[2].Visible = true;
+                string[] cols = { "Name", "Salary", "BirthDate" };
+                View(emptable, Emps, cols);
+                Emps.Columns[2].Visible = true;
+            }
+            else
+            {
+                empupdate.Text = "This Employee still in project";
+                empupdate.ForeColor = System.Drawing.Color.Red;
+                Emps.EditIndex = -1;
+                updateEmp();
+
+            }
 
         }
         protected void Emps_OnRowCancelingEdit(object sender, EventArgs e)
@@ -173,7 +185,15 @@ namespace DemoKda
             GridViewRow row = Emps.Rows[e.RowIndex];
             string n = (row.Cells[3].Controls[0] as TextBox).Text;
             string id = getId(emp_name, emptable);
-            string birth = "";
+            string birth = (row.Cells[5].Controls[0] as TextBox).Text;
+            string salary = (row.Cells[4].Controls[0] as TextBox).Text;
+            string D = (row.FindControl("ddlEditDep") as DropDownList).SelectedValue;
+            string depId = getId(D, deptable);
+
+            db.updateEmp(id,n,salary,birth,depId);
+            Emps.EditIndex = -1;
+            updateEmp();
+            updateDeps();
         }
 
         // Utilities
@@ -237,6 +257,24 @@ namespace DemoKda
             string[] cols = { "Name", "Salary", "Age" };
             View(emptable, Emps, cols);
             Emps.Columns[2].Visible = false;
+
+        }
+
+        public void Emps_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                DropDownList ddl = e.Row.FindControl("ddlEditDep") as DropDownList;
+                ddl.Items.Clear();
+                ddl.Items.Add(defult);
+                foreach (DataRow r in deptable.Rows)
+                {
+                    string record = r["Name"].ToString();
+                    if (ddl.Items.FindByText(record) == null)
+                        ddl.Items.Add(record);
+                }
+            }
+            
         }
 
     }

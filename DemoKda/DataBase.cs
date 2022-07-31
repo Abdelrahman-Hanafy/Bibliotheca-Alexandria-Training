@@ -39,6 +39,12 @@ namespace DemoKda
 
 
         //Update Queries
+        public void updateEmp(string id, string name,string salary,string birth,string dep)
+        {
+            string query = $"exec updateEmp {id},{name},{salary},'{birth}',{dep} ";
+            exec(query);
+        }
+
         public void updateSec(string id, string name)
         {
             string query = $"exec updateSec {id},{name} ";
@@ -109,6 +115,17 @@ namespace DemoKda
         }
 
         // Fetching Quries
+        public int countProjs(string id)
+        {
+            string query = $"exec countProjs {id}";
+            SqlCommand command = new SqlCommand(query, conn);
+            SqlDataReader reader = command.ExecuteReader();
+            reader.Read();
+            int ans = Int32.Parse(reader["num"].ToString());
+            reader.Close();
+            return ans;
+        }
+
         public DataTable fetchProj()
         {
             string[] cols = {"ID","Name", "Duration", "DailyCost", "TotalCost" };
