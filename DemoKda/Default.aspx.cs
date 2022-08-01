@@ -33,6 +33,8 @@ namespace DemoKda
                 
                 depddl.Items.Add(defult);
                 updateSecs();
+                //Show("Hello!!");
+                
             }
 
             if (IsPostBack)
@@ -153,9 +155,7 @@ namespace DemoKda
 
         protected void Emps_OnRowEditing(object sender, GridViewEditEventArgs e)
         {
-            GridViewRow row = Emps.Rows[e.NewEditIndex];
-            if (db.countProjs(getId(row.Cells[3].Text,emptable)) == 0){
-                
+            GridViewRow row = Emps.Rows[e.NewEditIndex];   
                 emp_name = row.Cells[3].Text;
                 Session["emp_name"] = emp_name;
 
@@ -164,16 +164,6 @@ namespace DemoKda
                 string[] cols = { "Name", "Salary", "BirthDate" };
                 View(emptable, Emps, cols);
                 Emps.Columns[2].Visible = true;
-            }
-            else
-            {
-                empupdate.Text = "This Employee still in project";
-                empupdate.ForeColor = System.Drawing.Color.Red;
-                Emps.EditIndex = -1;
-                updateEmp();
-
-            }
-
         }
         protected void Emps_OnRowCancelingEdit(object sender, EventArgs e)
         {
@@ -258,6 +248,12 @@ namespace DemoKda
             View(emptable, Emps, cols);
             Emps.Columns[2].Visible = false;
 
+        }
+
+        public void Show(string message)
+        {
+            //Response.Write($"{message}");
+            Response.Write("<script>alert('"+message+"');</script>");
         }
 
         public void Emps_RowDataBound(object sender, GridViewRowEventArgs e)

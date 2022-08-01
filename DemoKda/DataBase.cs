@@ -57,10 +57,28 @@ namespace DemoKda
             exec(query);
         }
 
+        public void updateProj(string id, string name,string st,string end)
+        {
+            string query = $"exec updateProj {name},'{st}','{end}',{id} ";
+            exec(query);
+        }
+
         //Delete Queries
         public void removeEmp(string id)
         {
             string query = $"exec removeEmp {id} ";
+            exec(query);
+        }
+
+        public void removeProjEmp(string id,string proj)
+        {
+            string query = $"exec removeProjEmp {id},{proj} ";
+            exec(query);
+        }
+
+        public void removeProjDep(string id, string proj)
+        {
+            string query = $"exec removeProjDep {id},{proj} ";
             exec(query);
         }
 
@@ -70,6 +88,11 @@ namespace DemoKda
             exec(query);
         }
 
+        public void removeProj(string id)
+        {
+            string query = $"exec removeProj {id} ";
+            exec(query);
+        }
 
         // Insertion Queirs
         public void insertSec(string name)
@@ -128,7 +151,7 @@ namespace DemoKda
 
         public DataTable fetchProj()
         {
-            string[] cols = {"ID","Name", "Duration", "DailyCost", "TotalCost" };
+            string[] cols = {"ID","Name", "Duration", "DailyCost", "TotalCost" , "IsActive", "StDate", "EndDate" };
             string query = $"exec fetchProj";
             return getRecords(query, cols);
         }
@@ -147,7 +170,7 @@ namespace DemoKda
         public DataTable fetchProjEmps(string pro)
         {
 
-            string[] cols = {"Name", "department", "DailyRate" };
+            string[] cols = {"ID","Name", "department", "DailyRate" };
             string query = $"exec fetchProjEmps2 {pro}" ;
 
             return getRecords(query, cols);
@@ -157,7 +180,7 @@ namespace DemoKda
         public DataTable fetchProjEmps(string pro,string dep)
         {
 
-            string[] cols = { "Name", "DailyRate" };
+            string[] cols = { "ID", "Name", "DailyRate" };
             string query = $"exec fetchProjEmps {pro},{dep}";
 
             return getRecords(query, cols);
@@ -188,7 +211,7 @@ namespace DemoKda
 
         public DataTable fetchdepProj(string pro)
         {
-            string[] cols = { "ID", "Name" };
+            string[] cols = { "ID", "Name", "Emp#" };
             string query = $"exec fetchdepProj {pro}";
             return getRecords(query, cols);
         }

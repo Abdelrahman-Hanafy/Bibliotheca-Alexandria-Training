@@ -81,7 +81,10 @@ namespace DemoKda
         protected void addbtn_Click(object sender, EventArgs e)
         {
             string name = secname.Text;
-            db.insertSec(name);
+            if (secddl.Items.FindByText(name) == null)
+                db.insertSec(name);
+            else
+                Show("This Sector is already On the system!");
             secname.Text = string.Empty;
         }
 
@@ -171,6 +174,12 @@ namespace DemoKda
                 }
             }
 
+        }
+
+        public void Show(string message)
+        {
+            //Response.Write($"{message}");
+            Response.Write("<script>alert('" + message + "');</script>");
         }
     }
 }

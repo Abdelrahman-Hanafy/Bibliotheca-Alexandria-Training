@@ -15,6 +15,15 @@ namespace DemoKda
     {
 
         /// <summary>
+        /// Delete1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Delete1;
+
+        /// <summary>
         /// projs control.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,15 @@ namespace DemoKda
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList projsddl;
+
+        /// <summary>
+        /// Delete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Delete;
 
         /// <summary>
         /// Dets control.
